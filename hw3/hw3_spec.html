@@ -1,0 +1,386 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+ <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+ <title>Assignments for CS 221, Fall 2025</title>
+ <link rel="stylesheet" href="../css/generic.css" type="text/css" />
+</head>
+
+
+<body class="margin">
+
+<div style="text-align: center;">
+  <img src="../images/logo.gif" alt="Gettysburg College" /><br />
+  <h2>
+  CS 221<br />
+  Computer Organization and Assembly Language Programming
+  </h2>
+  Fall 2025<br/>
+
+  <hr class="sep" />
+
+  <div style="text-align: center ;">
+  <h2>Assignment 3</h2>
+
+  <b>Due: Thu, Sep 18, by 11:59pm</b>
+  </div>
+
+  <div class="vspace"></div>
+
+</div>
+
+
+<!--*********** Assignments *************-->
+
+
+
+<div>
+
+<h2>Readings</h2>
+
+<ul>
+<li><div><a target="_blank" href="a3-files/java2c++.pdf">Java to C++</a></div><p /></li>
+
+<li><div><a target="_blank" href="a3-files/Rectangle.html">Rectangle.cpp</a> | <a target="_blank" href="a3-files/RectangleConst.html">RectangleConst.cpp</a> | <a target="_blank" href="a3-files/RectangleTemplate.html">RectangleTemplate.cpp</a></div><p /></li>
+
+<li>IMAL: Sections 1.7 and 1.8<p /></li>
+</ul>
+
+<!--Class examples: <a target="_blank" href="a2-files/demo.cpp">demo.cpp</a> | <a target="_blank" href="a2-files/Student.cpp">Student.cpp</a-->
+
+<h2>Description</h2>
+
+This assignment will focus on C++ and bitwise operations in the context of C++ templates (generics) and operator overloading. The main tasks are:
+
+<ul>
+<li>overloading bitwise, relational, and output operators for the <code>Bitset</code> class</li>
+<li>converting the <code>Bitset</code> class to a template to allow custom-width bitsets</li>
+<li>annotating the code to ensure const-safety</li>
+</ul>
+
+You could consider skipping around and completing at first the sections that seem easier.
+
+<h2>const Safety and No Copy</h2>
+
+This section could be skipped initially. See the class example.
+<p />
+As you write the code, for each method or independent function related to the <code>Bitset</code> class add <b><code>const</code></b>:
+<ul>
+<li>at the end of signature, if appropriate</li>
+<li>for each parameter of <i>non-primitive</i> type, where appropriate</li>
+</ul>
+<p />
+For each parameter of <i>non-primitive</i> type add <b>&amp;</b> where appropriate to avoid copying of objects.
+
+<p />
+
+<h2>Operator Overloading (Part I)</h2>
+
+At the end of class <code>Bitset</code> overload the following operators. Some will be overloaded as member methods and some as external functions.
+
+<p />
+
+<table border="1" cellpadding="10">
+
+<tr valign="middle">
+<td>
+<code style="color : tomato">testing the code</code></code>
+<p />
+<div style="padding-left: 4ex;">
+No <code>cout</code>, use the built-in C++ <code>assert</code> (not the one
+from Assignment 2). Need to include <b><code>cassert</code></b>.
+<p />
+Before you complete the <code>==</code> overload (but it is good to complete this right away):
+<blockquote>
+<pre style="font-size: 70%;">
+Bitset bitset1(0x????);
+Bitset bitset2(0x????);
+assert( (bitset1 X bitset2).getValue() == id(0x????) );
+</pre>
+</blockquote>
+
+After you complete the <code>==</code> overload:
+<ul>
+<li>use the editor to replace all <code>.getValue()</code> with empty string</li>
+<li>use the editor to replace all <code>id</code> with <code>Bitset</code></li>
+<li>now you can write:</li>
+</ul>
+<blockquote>
+<pre style="font-size: 70%;">
+Bitset bitset1(0x????);
+Bitset bitset2(0x????);
+assert( (bitset1 X bitset2) == Bitset(0x????) );
+</pre>
+</blockquote>
+</div>
+</td>
+</tr>
+
+<tr valign="middle">
+<td>
+<code style="color : tomato"><code>==&nbsp;&nbsp;!=</code></code>
+<p />
+<div style="padding-left: 4ex;">
+Overloads of the comparison operators (i.e. do they have same/diff value):
+<ul>
+<li><code>==</code>&nbsp;&nbsp;&nbsp;&nbsp; as method</li>
+<li><code>!=</code>&nbsp;&nbsp;&nbsp;&nbsp; as external function; one line only, no method calls, use ...</li>
+</ul>
+</div>
+</td>
+</tr>
+
+<tr valign="middle">
+<td>
+<code style="color : tomato"><code>&amp;&nbsp;&nbsp;|&nbsp;&nbsp;^&nbsp;&nbsp;~</code></code>
+<p />
+<div style="padding-left: 4ex;">
+Overloads of the bitwise operators (i.e. apply bitwise operation to Bitsets):
+<ul>
+<li><code>&amp;</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; as method</li>
+<li><code>|  ^</code>&nbsp;&nbsp;as external functions</li>
+<li><code>~</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; both as method and as external function, but comment out
+  the external function</li>
+<li><code>|</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; once you complete the above, implement <code>|</code> without using <code>|</code> (hint:<u><span style="color: white">use De Morgan's Law</span></u>)</li>
+</ul>  
+</div>
+</td>
+</tr>
+
+<tr valign="middle">
+<td>
+<code style="color : tomato"><code>&lt;&lt;&nbsp;&nbsp;&gt;&gt;</code></code>
+<p />
+<div style="padding-left: 4ex;">
+Overloads of the shift operators (i.e. shifting left/right by given number of positions):
+<ul>
+<li><code>&lt;&lt;</code>&nbsp;&nbsp;&nbsp;&nbsp; as method</li>
+<li><code>&gt;&gt;</code>&nbsp;&nbsp;&nbsp;&nbsp; as external function</li>
+</ul>  
+</div>
+</td>
+</tr>
+
+<tr valign="middle">
+<td>
+<code style="color : tomato"><code>&lt;&nbsp;&nbsp;&gt;=</code></code>
+<p />
+<div style="padding-left: 4ex;">
+Overloads of the comparison operators based on the value (is one bigger/lesseq
+than other):
+<ul>
+<li><code>&lt;</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; as method</li>
+<li><code>&gt;=</code>&nbsp;&nbsp;&nbsp;&nbsp; as external function; one line only, no method calls, use ...</li>
+</ul>  
+</div>
+</td>
+</tr>
+
+</table>
+
+<p />
+
+<h2>Operator Overloading (Part II)</h2>
+
+At the end of class <code>Bitset</code> overload the following operators. Some will be overloaded as member methods and some as independent functions.
+
+<p />
+
+<table border="1" cellpadding="10">
+
+  <tr valign="middle">
+<td>
+<code style="color : tomato">testing the code</code></code>
+<p />
+<div style="padding-left: 4ex;">
+No <code>cout</code>, use <code>assert</code>. Mostly will have this format:
+<blockquote>
+<pre style="font-size: 70%;">
+bitset1 = Bitset(0x????);  // or 0b??..??
+apply operation on bitset1
+assert( bitset1 == Bitset(0x????) );
+assert( bitset2 == Bitset(0x????) );  // if bitset2 involved in test
+</pre>
+</blockquote>
+</div>
+</td>
+</tr>
+
+<tr valign="middle">
+<td>
+<code style="color : tomato"><code>^=</code></code>
+<p />
+<div style="padding-left: 4ex;">
+Overload of the bitiwse operator as method.
+<p />
+It should now be possible to write:
+<blockquote>
+<pre style="font-size: 70%;">
+bitset1 = Bitset(0x????);
+bitset2 = Bitset(0x????);
+bitset3 = bitset1 ^= bitset2;   // evaluates right to left
+assert( ... );
+assert( ... );
+</pre>
+</div>
+</td>
+</tr>
+
+<tr valign="middle">
+<td>
+<code style="color : tomato"><code>&gt;&gt;=</code></code>
+<p />
+<div style="padding-left: 4ex;">
+Overload of the shift operator as method.
+<p />
+It should now be possible to write:
+<blockquote>
+<pre style="font-size: 70%;">
+bitset1 = Bitset(0x????);  // or 0b??..??
+bitset1 &gt;&gt;= 5;
+bitset2 = bitset1 &gt;&gt;= 5;  // evaluates right to left
+assert( ... );
+assert( ... );
+</pre>
+</div>
+</td>
+</tr>
+
+<!--tr valign="middle">
+<td>
+<code style="color : tomato"><code>+=</code></code>
+<p />
+<div style="padding-left: 4ex;">
+Adds unsigned short value to the bitset.
+<p />
+It should now be possible to write:
+<blockquote>
+<pre style="font-size: 70%;">
+bitset = dec-value;
+bitset += 5;
+assert( ... );
+assert( ... );
+</pre>
+</div>
+</td>
+</tr-->
+
+<tr valign="middle">
+<td>
+<code style="color : tomato"><code>++</code></code>
+<p />
+<div style="padding-left: 4ex;">
+The prefix increment operator as method.
+<p />
+It should now be possible to write:
+<blockquote>
+<pre style="font-size: 70%;">
+bitset = Bitset(dec-value);
+++bitset;
+assert( ... );
+++(++(++bitset));
+assert( ... );
+</pre>
+</div>
+</td>
+</tr>
+
+<tr valign="middle">
+<td>
+<code style="color : tomato"><code>&lt;&lt;</code></code>
+<p />
+<div style="padding-left: 4ex;">
+Overload of the left shift operator for display as external function (cannot be done as method; why?). To simplify the code it does not show the binary version. It should now be possible to write:
+<p />
+<blockquote>
+<pre style="font-size: 70%;">
+bitset = Bitset(hex/bin-value);
+cout << bitset;                         // displays   [25, 0x19, 031]
+cout << "value: " << bitset << endl;    // displays   value: [25, 0x19, 031]
+</pre>
+</blockquote>
+<p />
+Note that the type of <code>cout</code> is <code>ostream</code> and in the implementation should be paired with the <b>&</b>. 
+<p />
+The code is easy, just copy the code from method <code>print</code> with minor modifications. The challenge here is to figure out the <i>return type</i> and <i>number/type of parameters</i>.
+</div>
+</td>
+</tr>
+
+</table>
+
+<p />
+
+<h2>Custom Width Bitset, Templates</h2>
+
+<p />
+
+Make the <code>Bitset</code> class generic using a template. This would allow creating custom width bitsets:
+<p />
+<blockquote>
+<pre style="font-size: 70%;">
+Bitset&lt;unsigned char&gt; bitset1 = hex/bin-value;    // 1 byte bitset
+Bitset&lt;unsigned short&gt; bitset2 = hex/bin-value;   // 2 byte bitset
+Bitset&lt;unsigned int&gt; bitset3 = hex/bin-value;     // 4 byte bitset
+Bitset&lt;unsigned long long&gt; bitset4 = hex/bin-value;    // 8 byte bitset
+</pre>
+</blockquote>
+<p >
+Here are things to keep in mind:
+<ul>
+<li>add new integer const/final data member initialized in-place to the size of the type used for the <code>Bitset</code>:
+<blockquote>
+<pre style="font-size: 70%;">
+... NAME = 8*sizeof( the-type-of-the-bitset-data );  // computes number of bits
+
+[ note: sizeof(char) gives 1, sizeof(short) gives 2, ..., sizeof(long long) gives 8 ]
+[ note: sizeof(Cat) gives sum of byte sizes of Cat data members ]
+</pre>
+</blockquote>
+<p />
+</li>
+
+<li>add three constants that have the type used for the <code>Bitset</code>: one of the constants should have all its bits set to 0 (i.e. has value 0); the other should have only the last bit set to 1 (i.e. has value 1); the third should have all of its bits set to 1<p /></li>
+
+<li>use the new constants in the rest of the code to create the necessary masks with appropriate bit shifts relative to the width (can no longer shift by a fixed number 8)<p /></li>
+
+<li>do not use any multi-digit numbers<p /></li>
+
+<li>since the bitset data is no longer <code>short</code> many things need to change in code from Assignment 2<p /></li>
+
+<li>each external function in Assignment 3 should be turned into template (same syntax as making the class template)<p /></li>
+</ul>
+
+<p />
+
+For testing, create one bitset of width 1 byte and one bitset of width 8 bytes and then check only the methods from Assignment 2 in this format:
+<p />
+<blockquote>
+<pre style="font-size: 70%;">
+// for non-void methods
+bitset = hex/bin-value;
+assert( bitset.nonVoidMethod() == hex/bin-value );
+
+// for void methods
+bitset = hex/bin-value;
+bitset.voidMethod();
+assert( bitset == Bitset(hex/bin-value) );
+</pre>
+</blockquote>
+
+<p />
+
+</div>
+
+<hr class="sep" />
+
+<div>
+<h2>What to turn in</h2>
+
+Upload <code>Bitset.cpp</code> to the Moodle dropbox.
+
+</div>
+
+</body>
+</html>
